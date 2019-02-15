@@ -1,0 +1,32 @@
+<div [ngClass]="{opened: status$ | async, 'content-wrapper': true}">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>{{naam}}<a class="delete-knop" (click)="removeRace()"><fa name="trash"></fa></a></h1>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" width="50px">startnummer</th>
+              <th scope="col" style="min-width: 250px">naam</th>
+              <th scope="col">geslacht</th>
+              <th scope="col">tijd</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let col of lijst$ | async">
+              <td>{{col.startNumber}}</td>
+              <td>{{col.name}}</td>
+              <td>{{col.gender}}</td>
+              <td>{{col.finish}}</td>
+              <td><a (click)="removeRunner(col)"><fa name="trash"></fa></a></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary btn-success" (click)="addRunner()">Voeg deelnemer toe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

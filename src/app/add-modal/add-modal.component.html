@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h2 class="modal-title">Add race</h2>
+  <button class="close" type="button" (click)="modalService.dismissAll('Cross click')">x</button>
+</div>
+<div class="modal-body">
+  <form class="form-inline mx-sm-3 mb-2" [formGroup]="myForm">
+      <!--<label class="sr-only">Name</label>-->
+      <input class="form-control" formControlName="name">
+    <button type="button" class="btn btn-primary ml-2" (click)="addRace(myForm.value.name)">Add</button>
+  </form>
+</div>

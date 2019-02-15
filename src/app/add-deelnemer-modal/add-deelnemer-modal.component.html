@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h2 class="modal-title">Add deelnemer</h2>
+  <button class="close" type="button" (click)="modalService.dismissAll('Cross click')">x</button>
+</div>
+<div class="modal-body">
+  <form class="form-inline mx-sm-3 mb-2" [formGroup]="myForm">
+    <table>
+      <tr class="form-group row">
+        <label class="col-form-label">
+          <td>Startnummer:</td>
+          <td><input required type="number" formControlName="startNumber"></td>
+        </label>
+      </tr>
+      <tr class="form-group row">
+        <label>
+          <td>Voornaam:</td>
+          <td><input required type="text" formControlName="firstName"></td>
+        </label>
+      </tr>
+      <tr class="form-group row">
+        <label>
+          <td>Familienaam:</td>
+          <td><input required type="text" formControlName="lastName"></td>
+        </label>
+      </tr>
+      <tr class="form-group row">
+        <label formGroupName="gender">
+          <td>Geslacht:</td>
+          <td><input type="radio" formControlName="genderValue" value="M" required> <fa name="mars"></fa></td>
+          <td><input type="radio" formControlName="genderValue" value="V" required> <fa name="venus"></fa></td>
+        </label>
+      </tr>
+    </table>
+
+  </form>
+  <!--<p >Startnummer: {{myForm.value.startNumber}}</p>-->
+  <!--<p >Firstname: {{myForm.value.firstName}}</p>-->
+  <!--<p >Lastname: {{myForm.value.lastName}}</p>-->
+  <!--<p >Gender: {{myForm.value.genderValue}}</p>-->
+
+  <span class="d-block middenButton"><button class="btn btn-primary" [disabled]="myForm.invalid" (click)="submitRunner()">Voeg toe</button></span>
+</div>
+

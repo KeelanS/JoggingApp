@@ -1,0 +1,43 @@
+header {
+  background-color: #80B5E9;
+}
+
+/* Sidebar button */
+#sidebar-button {
+  font-size: 3em;
+  width: 250px;
+  letter-spacing: 5px;
+  color: #233140;
+  padding: 0 10px 0 10px;
+  border-right: 2px solid #233140;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#midden {
+  font-size: 1em;
+}
+
+.show {
+  display: none;
+}
+
+.button-to-left {
+  padding-left: 10px;
+  width: 50px;
+}
+
+/* Logo */
+
+.logo {
+  /* Text */
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Bookman Old Style";
+  color: #233140;
+  /* Placing */
+  padding-left: 20px;
+  border-left: 2px solid #233140;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

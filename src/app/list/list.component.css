@@ -1,0 +1,28 @@
+/* Content */
+.content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+.opened {
+  padding-left: 250px;
+}
+
+h1 {
+  margin-bottom: .7em;
+}
+
+li {
+  width: 200px;
+}
+
+li:nth-child(even) {
+  background-color: lightgray;
+}
+
+.delete-knop {
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
+}

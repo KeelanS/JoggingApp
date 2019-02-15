@@ -1,0 +1,13 @@
+<div [ngClass]="{opened: status$ | async, sidebar: true}">
+  <ul class="sidebar-nav">
+    <li><a routerLink="/content">Content</a></li>
+  </ul>
+  <ul class="sidebar-nav" cdkDropList (cdkDropListDropped)="dropped($event)">
+    <li *ngFor="let race of races$ | async" cdkDrag>
+      <a *ngIf="status$ | async" [routerLink]="['/list', race.raceId]">{{race.raceName}}</a>
+    </li>
+  </ul>
+  <ul class="sidebar-nav">
+    <li *ngIf="status$ | async"><a (click)="open()">+</a></li>
+  </ul>
+</div>

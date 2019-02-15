@@ -1,0 +1,12 @@
+<header class="d-flex">
+  <div id="sidebar-button" [ngClass]="{'d-flex': status$ | async, 'justify-content-end': status$ | async, 'justify-content-start':!(status$ | async), 'button-to-left': !(status$ | async) }" >
+    <div (click)="hideService.change()">
+      <fa name="angle-double-left" [class.show]="!(status$ | async)" ></fa>
+      <span id="midden"><fa name="bars"></fa></span>
+      <fa name="angle-double-right" [class.show]="status$ | async"></fa>
+    </div>
+  </div>
+  <div class="logo">
+    Kermisjogging test
+  </div>
+</header>
