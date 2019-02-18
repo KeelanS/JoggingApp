@@ -6,19 +6,21 @@
         <table class="table">
           <thead class="thead-light">
             <tr>
-              <th scope="col" width="50px">startnummer</th>
-              <th scope="col" style="min-width: 250px">naam</th>
-              <th scope="col">geslacht</th>
-              <th scope="col">tijd</th>
+              <th scope="col" width="50px">Rangschikking</th>
+              <th scope="col" width="50px">Startnummer</th>
+              <th scope="col" style="min-width: 250px">Naam</th>
+              <th scope="col">Geslacht</th>
+              <th scope="col">Tijd</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let col of lijst$ | async">
+              <td>{{col.ranking}}</td>
               <td>{{col.startNumber}}</td>
               <td>{{col.name}}</td>
               <td>{{col.gender}}</td>
-              <td>{{col.finish}}</td>
+              <td>{{col.finish ? col.finish.toString().slice(3,8) : null}}</td>
               <td><a (click)="removeRunner(col)"><fa name="trash"></fa></a></td>
             </tr>
           </tbody>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HideService } from "../hide.service";
+import {HeaderNameService} from "../header-name.service";
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ export class HeaderComponent {
 
   status$ = this.hideService.getStatus();
 
-  constructor(public hideService: HideService) { }
+  constructor(public hideService: HideService,
+              public headerName: HeaderNameService) { }
 
 }

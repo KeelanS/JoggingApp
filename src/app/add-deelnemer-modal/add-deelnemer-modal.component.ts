@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../data.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {BehaviorSubject} from "rxjs/index";
 import {Runner} from "../runner";
-import {ActivatedRoute} from "@angular/router";
-import {tap} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-add-deelnemer-modal',
@@ -32,7 +29,7 @@ export class AddDeelnemerModalComponent{
     const name = this.myForm.value.firstName.trim() + ' ' + this.myForm.value.lastName.trim();
     const gender = this.myForm.get("gender").value.genderValue;
     const raceId = this.dataService.raceId$.value;
-    const runner = new Runner(startNumber, name, gender, null, raceId);
+    const runner = new Runner(startNumber, name, gender, null, raceId, null);
     this.dataService.addRunner(runner).subscribe();
     this.dataService.getRunners(raceId).subscribe();
     this.modalService.dismissAll('Data sent');

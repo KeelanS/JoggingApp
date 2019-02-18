@@ -1,6 +1,6 @@
 <div [ngClass]="{opened: status$ | async, sidebar: true}">
   <ul class="sidebar-nav">
-    <li><a routerLink="/content">Content</a></li>
+    <li><a routerLink="/content">Startpagina</a></li>
   </ul>
   <ul class="sidebar-nav" cdkDropList (cdkDropListDropped)="dropped($event)">
     <li *ngFor="let race of races$ | async" cdkDrag>

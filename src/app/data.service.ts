@@ -40,10 +40,6 @@ export class DataService {
     return this.races;
   }
 
-  setRaces(races: Race[]) {
-    this._races$.next(races);
-  }
-
   addRace(name: string): Observable<Race> {
     return this.http.post<Race>(endpoint + 'races', {name}).pipe(
       tap(race => {
@@ -55,7 +51,7 @@ export class DataService {
 
   removeRace(): Observable<boolean>{
 
-    return this.http.post(endpoint + 'races/' + this.raceId$.value + '/remove', {}).pipe(tap(r => {
+    return this.http.post(endpoint + 'races/' + this.raceId$.value + '/remove', {}).pipe(tap(() => {
       const race = this.races.filter(race => this.raceId$.value == race.raceId)[0];
       const raceIndex = this.races.indexOf(race);
       this.races.splice(raceIndex, 1);
@@ -89,7 +85,7 @@ export class DataService {
   }
 
   removeRunner(runner: Runner): Observable<boolean> {
-    return this.http.post(endpoint + 'runners/' + runner.startNumber + '/remove', {}).pipe(tap(r => {
+    return this.http.post(endpoint + 'runners/' + runner.startNumber + '/remove', {}).pipe(tap(() => {
       const index = this.runners.indexOf(runner);
       this.runners.splice(index, 1);
       this._runners$.next(this.runners);
