@@ -2,13 +2,21 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <h1>Verander naam</h1>
-        <p class="form-inline" [formGroup]="naamForm">
-          <input type="text" formControlName="naam" value={{naam.value}}>
-          <button class="btn btn-primary" (click)="changeName()">
+        <h1>Startpagina</h1>
+        <h6 class="form-inline content-item" [formGroup]="naamForm">
+          <label>
+            <span class="content-item-inline">Evenement:</span>
+            <input class="content-item-inline" type="text" formControlName="naam" >
+          </label>
+          <button class="btn btn-primary content-item-inline" (click)="changeName()">
             <fa name="check"></fa>
           </button>
-        </p>
+        </h6>
+        <h5 class="content-item">Overzicht races</h5>
+        <div class="race-lijst">
+          <a *ngFor="let race of races$ | async" [routerLink]="['/list', race.raceId]">{{race.raceName}}</a>
+          <a class="voeg-toe" (click)="open()">+</a>
+        </div>
       </div>
     </div>
   </div>

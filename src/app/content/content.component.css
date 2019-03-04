@@ -9,3 +9,36 @@
   padding-left: 250px;
 }
 
+.content-item {
+  margin-top: 30px;
+}
+
+.content-item-inline {
+  margin-right: 10px;
+}
+
+.race-lijst {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.race-lijst a {
+  padding: 10px 20px 10px 20px;
+  margin: 10px 20px 20px 0;
+
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 3em;
+  color: #EDECEC;
+  text-align: center;
+
+  cursor: pointer;
+  background-color: #2c3e50;
+  border-radius: 20px;
+}
+
+.race-lijst a:hover {
+  background-color: #16A085;
+}
+
