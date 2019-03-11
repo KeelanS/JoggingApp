@@ -12,6 +12,7 @@
               <th scope="col">Geslacht</th>
               <th scope="col">Tijd</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +23,7 @@
               <td>{{col.gender}}</td>
               <td>{{col.finish ? col.finish.toString().slice(3,8) : null}}</td>
               <td><a (click)="removeRunner(col)"><fa name="trash"></fa></a></td>
+              <td><a (click)="updateRunner(col)"><fa name="pencil"></fa></a></td>
             </tr>
           </tbody>
         </table>

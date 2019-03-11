@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h2 class="modal-title">Add deelnemer</h2>
+  <h2 class="modal-title">{{title}}</h2>
   <button class="close" type="button" (click)="modalService.dismissAll('Cross click')">x</button>
 </div>
 <div class="modal-body">
@@ -8,7 +8,9 @@
       <tr class="form-group row">
         <label class="col-form-label">
           <td>Startnummer:</td>
-          <td><input required type="number" formControlName="startNumber"></td>
+          <td>
+            <input [attr.disabled]="runner !=  null ? '' : null" required type="number" formControlName="startNumber">
+          </td>
         </label>
       </tr>
       <tr class="form-group row">
@@ -31,13 +33,6 @@
         </label>
       </tr>
     </table>
-
   </form>
-  <!--<p >Startnummer: {{myForm.value.startNumber}}</p>-->
-  <!--<p >Firstname: {{myForm.value.firstName}}</p>-->
-  <!--<p >Lastname: {{myForm.value.lastName}}</p>-->
-  <!--<p >Gender: {{myForm.value.genderValue}}</p>-->
-
-  <span class="d-block middenButton"><button class="btn btn-primary" [disabled]="myForm.invalid" (click)="submitRunner()">Voeg toe</button></span>
+  <span class="d-block middenButton"><button class="btn btn-primary" [disabled]="myForm.invalid" (click)="submitRunner()">{{buttonText}}</button></span>
 </div>
-

@@ -7,7 +7,6 @@ import {filter, takeUntil} from "rxjs/internal/operators";
 import {Runner} from "../runner";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddDeelnemerModalComponent} from "../add-deelnemer-modal/add-deelnemer-modal.component";
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-list',
@@ -55,6 +54,11 @@ export class ListComponent implements OnInit, OnDestroy {
     this.modalService.open(AddDeelnemerModalComponent, {centered: true});
   }
 
+  updateRunner(runner: Runner) {
+    const modalRef = this.modalService.open(AddDeelnemerModalComponent, {centered: true});
+    modalRef.componentInstance.runner = runner;
+  }
+
   removeRace() {
     if (confirm("Ben je zeker dat je de race: \'" + this.naam + "\' wilt verwijderen?")) {
       this.dataService.removeRace().subscribe();
@@ -63,7 +67,9 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   removeRunner(runner: Runner) {
-    this.dataService.removeRunner(runner).subscribe();
+    if (confirm("Ben je zeker dat je " + runner.name + " wilt verwijderen?")) {
+      this.dataService.removeRunner(runner).subscribe();
+    }
   }
 
   // - - a - -  b - - c - -   d - - e -
