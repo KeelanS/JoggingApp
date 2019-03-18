@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-        <h1>{{naam}}<a class="delete-knop" (click)="removeRace()"><fa name="trash"></fa></a></h1>
+        <h1>{{naam}}<a class="rechts-float" (click)="removeRace()"><fa name="trash"></fa></a></h1>
         <table class="table">
           <thead class="thead-light">
             <tr>
@@ -27,7 +27,10 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn btn-primary btn-success" (click)="addRunner()">Voeg deelnemer toe</button>
+        <div class="onderkant">
+          <button class="btn btn-primary btn-success bottom-buttons" (click)="addRunner()">Voeg deelnemer toe</button>
+          <button class="btn btn-primary btn-success bottom-buttons" (click)="fillResults()">Resultaten invullen</button>
+        </div>
       </div>
     </div>
   </div>

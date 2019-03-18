@@ -16,6 +16,9 @@ import { AddModalComponent } from './add-modal/add-modal.component';
 import { HttpClientModule } from "@angular/common/http";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddDeelnemerModalComponent } from './add-deelnemer-modal/add-deelnemer-modal.component';
+import { InvullenModalComponent } from './invullen-modal/invullen-modal.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatFormFieldModule, MatInputModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { AddDeelnemerModalComponent } from './add-deelnemer-modal/add-deelnemer-
     AddModalComponent,
     PageNotFoundComponent,
     AddDeelnemerModalComponent,
+    InvullenModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +41,11 @@ import { AddDeelnemerModalComponent } from './add-deelnemer-modal/add-deelnemer-
     NgbModule,
     HttpClientModule,
     DragDropModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    MatInputModule,
   ],
-  entryComponents: [AddModalComponent, AddDeelnemerModalComponent],
+  entryComponents: [AddModalComponent, AddDeelnemerModalComponent, InvullenModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

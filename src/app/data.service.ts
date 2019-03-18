@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Race } from "./race";
 import { BehaviorSubject, Observable } from "rxjs/index";
 import { HttpClient } from "@angular/common/http";
-import {mapTo, tap} from "rxjs/internal/operators";
+import {map, mapTo, tap} from "rxjs/internal/operators";
 import {Runner} from "./runner";
+import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
 
 const endpoint = 'http://localhost:3000/';
 
@@ -18,7 +19,7 @@ export class DataService {
   private _races$ = new BehaviorSubject([]);
   races$: Observable<Race[]> = this._races$.asObservable();
 
-  private  runners: Runner[] = [];
+  private runners: Runner[] = [];
   private _runners$ = new BehaviorSubject([]);
   runners$: Observable<Runner[]> = this._runners$;
 
@@ -71,6 +72,10 @@ export class DataService {
     );
   }
 
+  getRunnersCopy(): Runner[] {
+    return JSON.parse(JSON.stringify(this.runners));
+  }
+
   addRunner(runner: Runner): Observable<Runner>{
     const body = {
       startNumber: runner.startNumber,
@@ -108,5 +113,12 @@ export class DataService {
       this.runners.splice(index, 1, r);
       this._runners$.next(this.runners);
     }), mapTo(true));
+  }
+
+  editRunnerList(lijst: Runner[]): Observable<boolean> {
+    return this.http.put(endpoint + 'runners', lijst).pipe(
+      tap(r => this.getRunners(this.raceId$.value).subscribe()),
+      mapTo(true)
+    );
   }
 }

@@ -1,0 +1,58 @@
+<div class="wrapper">
+  <div class="linker-form" [formGroup]="myForm">
+    <div class="top-buttons btn-group btn-group-toggle">
+      <button class="btn btn-outline-success" (click)="selectRank()">Volgorde</button>
+      <button class="btn btn-outline-success" (click)="selectTime()">Tijden</button>
+    </div>
+    <div class="invul-input">
+      <label *ngIf="toggle">
+        <mat-form-field>
+          <input formControlName="startnummer"
+                 matInput
+                 type="text"
+                 placeholder="Startnummer"
+                 (keyup.enter)="submitStartnummer()"
+                 autocomplete="off"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="startnummer.invalid">{{getStartnummerErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </label>
+      <label *ngIf="!toggle">
+        <mat-form-field>
+          <input formControlName="tijd"
+                 matInput
+                 type="text"
+                 placeholder="Tijd"
+                 (keyup.enter)="submitTijd()"
+                 [errorStateMatcher]="matcher"
+                 autocomplete="off">
+          <mat-error *ngIf="tijd.invalid">{{getTijdErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </label>
+    </div>
+    <div class="bot-buttons">
+      <button class="btn btn-primary" (click)="modalService.dismissAll('Cancelled')">Cancel</button>
+      <button class="btn btn-primary" (click)="submitAll()">Submit</button>
+    </div>
+  </div>
+
+  <div class="preview-lijst">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Plaats</th>
+          <th scope="col">Nummer</th>
+          <th scope="col">Tijd</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let runner of lijst" [ngClass]="{'table-active': selectedRowIndex == runner.ranking}">
+          <td scope="row">{{runner.ranking}}</td>
+          <td>{{runner.startNumber}}</td>
+          <td>{{runner.finish ? showTime(runner) : ""}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

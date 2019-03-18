@@ -1,0 +1,45 @@
+/*.wrapper {*/
+  /*display: flex;*/
+  /*width: 1000px;*/
+/*}*/
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 300px;
+}
+
+.linker-form {
+  width: 375px;
+}
+
+.preview-lijst {
+  width: 375px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.top-buttons {
+  margin-top: 10%;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.invul-input {
+  margin-top: 10%;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.bot-buttons {
+  margin-top: 10%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

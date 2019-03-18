@@ -18,8 +18,8 @@ export class AddModalComponent implements OnInit {
   }
 
   constructor(public dataService: DataService,
-              private fb: FormBuilder,
-              public modalService: NgbModal,
+                    private fb: FormBuilder,
+                    public modalService: NgbModal,
   ) {  }
 
   ngOnInit() {

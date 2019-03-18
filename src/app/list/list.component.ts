@@ -7,6 +7,7 @@ import {filter, takeUntil} from "rxjs/internal/operators";
 import {Runner} from "../runner";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddDeelnemerModalComponent} from "../add-deelnemer-modal/add-deelnemer-modal.component";
+import {InvullenModalComponent} from "../invullen-modal/invullen-modal.component";
 
 @Component({
   selector: 'app-list',
@@ -52,6 +53,10 @@ export class ListComponent implements OnInit, OnDestroy {
 
   addRunner(){
     this.modalService.open(AddDeelnemerModalComponent, {centered: true});
+  }
+
+  fillResults() {
+    this.modalService.open(InvullenModalComponent, {centered: true, windowClass: 'app-modal-window', size: 'lg', backdrop: "static", keyboard: false});
   }
 
   updateRunner(runner: Runner) {

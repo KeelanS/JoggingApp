@@ -17,12 +17,26 @@ li {
   width: 200px;
 }
 
-li:nth-child(even) {
-  background-color: lightgray;
-}
+/*li:nth-child(even) {*/
+  /*background-color: lightgray;*/
+/*}*/
 
-.delete-knop {
+.rechts-float {
   float: right;
   margin-right: 20px;
   cursor: pointer;
 }
+
+.bottom-buttons {
+  background-color: #16A085;
+  margin: 15px 10px;
+}
+
+.onderkant {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+
+
