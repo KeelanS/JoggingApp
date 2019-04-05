@@ -66,6 +66,7 @@ export class DataService {
     return this.http.get<Runner[]>(endpoint + 'races/' + id + '/runners').pipe(
       tap(runs => {
         this.runners = runs;
+        // this.sortRunners();
         this._runners$.next(this.runners);
       }),
       mapTo(true)
@@ -121,4 +122,6 @@ export class DataService {
       mapTo(true)
     );
   }
+
+
 }

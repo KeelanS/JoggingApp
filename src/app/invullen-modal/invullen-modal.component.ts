@@ -34,6 +34,7 @@ export class InvullenModalComponent implements OnInit {
       Validators.pattern('^[0-9]*$'),
       Validators.minLength(3),
       Validators.maxLength(4),
+      this.alleTijdenIngevuldValidator.bind(this)
     ]),
   });
   toggle = true;
@@ -46,6 +47,9 @@ export class InvullenModalComponent implements OnInit {
 
   ngOnInit() {
     this.controleLijst = this.dataService.getRunnersCopy();
+    this.controleLijst.forEach(r => {
+      r.finish = null;
+    });
   }
 
   startnummerValidator(control: FormControl) {
@@ -76,6 +80,14 @@ export class InvullenModalComponent implements OnInit {
       }
       return null;
     }
+  }
+
+  alleTijdenIngevuldValidator(control: FormControl) {
+
+    if (this.controleLijst == null || this.selectedRowIndex > this.controleLijst.length) {
+      return {allesIngevuld: true}
+    }
+    return null;
   }
 
   selectRank() {
@@ -144,7 +156,8 @@ export class InvullenModalComponent implements OnInit {
     return this.tijd.hasError('required') ? "De tijd moet ingevuld zijn" :
       this.tijd.hasError('pattern') ? "Enkel cijfers toegelaten" :
         (this.tijd.hasError('minlength',) || this.tijd.hasError('maxlength')) ?
-          "Tijd is 3-4 cijfers lang" : "";
+          "Tijd is 3-4 cijfers lang" : 
+          this.tijd.hasError('allesIngevuld') ? "Alle tijden zijn ingevuld" : "";
   }
 
   submitAll() {

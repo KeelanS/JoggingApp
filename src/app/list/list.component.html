@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let col of lijst$ | async">
+            <tr *ngFor="let col of lijst$ | async | sortRunner">
               <td>{{col.ranking}}</td>
               <td>{{col.startNumber}}</td>
               <td>{{col.name}}</td>
