@@ -40,8 +40,8 @@ export class ListComponent implements OnInit, OnDestroy {
       } else {
         this.naam = race.raceName;
         this.lijst$ = this.dataService.runners$;
-        this.dataService.getRunners(race.raceId).subscribe();
-        this.dataService.raceId$.next(race.raceId);
+        this.dataService.setRaceId(race.raceId);
+        this.dataService.getRunners().subscribe();
       }
     });
   }

@@ -162,6 +162,7 @@ export class InvullenModalComponent implements OnInit {
 
   submitAll() {
     this.dataService.editRunnerList(this.lijst).subscribe();
+    this.dataService.getRunners().subscribe();
     this.modalService.dismissAll("Data submitted");
   }
 

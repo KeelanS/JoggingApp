@@ -16,6 +16,10 @@ export class RunnerSorter  implements PipeTransform {
         if (aFinish == bFinish) {
           return (aStartNummer < bStartNummer) ? -1 : 1;
         } else {
+          if (aFinish == null) 
+            return 1;
+          if (bFinish == null)
+            return -1;
           return (aFinish < bFinish) ? -1 : 1;
         }
     });

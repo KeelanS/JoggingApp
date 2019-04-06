@@ -36,10 +36,10 @@ export class AddDeelnemerModalComponent implements OnInit {
       const startNumber = this.myForm.value.startNumber;
       const name = this.myForm.value.firstName.trim() + ' ' + this.myForm.value.lastName.trim();
       const gender = this.myForm.get("gender").value.genderValue;
-      const raceId = this.dataService.raceId$.value;
+      const raceId = this.dataService.getRaceId();
       const runner = new Runner(startNumber, name, gender, null, raceId, null);
       this.dataService.addRunner(runner).subscribe();
-      this.dataService.getRunners(raceId).subscribe();
+      this.dataService.getRunners().subscribe();
       this.modalService.dismissAll('Data sent');
     } else {
       if (this.myForm.dirty) {
@@ -48,7 +48,7 @@ export class AddDeelnemerModalComponent implements OnInit {
         if (this.myForm.controls.gender.dirty)
           this.runner.gender = this.myForm.get("gender").value.genderValue;
         this.dataService.editRunner(this.runner).subscribe();
-        this.dataService.getRunners(this.dataService.raceId$.value);
+        this.dataService.getRunners().subscribe();
         this.modalService.dismissAll('Data editted')
       } else {
         this.modalService.dismissAll('Nothing changed so nothing sent');
