@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import {map, mapTo, tap} from "rxjs/internal/operators";
 import {Runner} from "./runner";
 import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
+import { RunnerSorter } from './runnerSorter';
 
 const endpoint = 'http://localhost:3000/';
 
@@ -13,7 +14,9 @@ const endpoint = 'http://localhost:3000/';
 })
 export class DataService {
   //Saved to
-  raceId$ = new BehaviorSubject(0);
+  private raceId = 0;
+  private _raceId$ = new BehaviorSubject(this.raceId);
+  raceId$: Observable<Number> = this._raceId$.asObservable();
 
   private races: Race[] = [];
   private _races$ = new BehaviorSubject([]);
@@ -25,6 +28,16 @@ export class DataService {
 
   constructor( private http: HttpClient) { }
 
+  //RaceID
+
+  setRaceId(id: number) {
+    this.raceId = id;
+    this._raceId$.next(this.raceId);
+  }
+
+  getRaceId(): number {
+    return this.raceId;
+  }
   //Races
 
   getRaces(): Observable<boolean> {
@@ -52,8 +65,8 @@ export class DataService {
 
   removeRace(): Observable<boolean>{
 
-    return this.http.post(endpoint + 'races/' + this.raceId$.value + '/remove', {}).pipe(tap(() => {
-      const race = this.races.filter(race => this.raceId$.value == race.raceId)[0];
+    return this.http.post(endpoint + 'races/' + this.raceId + '/remove', {}).pipe(tap(() => {
+      const race = this.races.filter(race => this.raceId == race.raceId)[0];
       const raceIndex = this.races.indexOf(race);
       this.races.splice(raceIndex, 1);
       this._races$.next(this.races);
@@ -62,8 +75,8 @@ export class DataService {
 
   //Runners
 
-  getRunners(id: number): Observable<boolean> {
-    return this.http.get<Runner[]>(endpoint + 'races/' + id + '/runners').pipe(
+  getRunners(): Observable<boolean> {
+    return this.http.get<Runner[]>(endpoint + 'races/' + this.raceId + '/runners').pipe(
       tap(runs => {
         this.runners = runs;
         this._runners$.next(this.runners);
@@ -117,8 +130,11 @@ export class DataService {
 
   editRunnerList(lijst: Runner[]): Observable<boolean> {
     return this.http.put(endpoint + 'runners', lijst).pipe(
-      tap(r => this.getRunners(this.raceId$.value).subscribe()),
       mapTo(true)
     );
+  }
+
+  resetCurrentRunnerList(): void {
+    // this.runners.forEach()
   }
 }

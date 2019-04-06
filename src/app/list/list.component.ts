@@ -16,10 +16,9 @@ import {InvullenModalComponent} from "../invullen-modal/invullen-modal.component
 })
 export class ListComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
-
-  private status$ = this.hideService.getStatus();
-  private lijst$: Observable<Runner[]>;
-  private naam: string;
+  status$ = this.hideService.getStatus();
+  lijst$: Observable<Runner[]>;
+  naam: string;
 
   //route wordt gebruikt om te weten welke race je gebruikt
   constructor( public hideService: HideService,
@@ -41,8 +40,8 @@ export class ListComponent implements OnInit, OnDestroy {
       } else {
         this.naam = race.raceName;
         this.lijst$ = this.dataService.runners$;
-        this.dataService.getRunners(race.raceId).subscribe();
-        this.dataService.raceId$.next(race.raceId);
+        this.dataService.setRaceId(race.raceId);
+        this.dataService.getRunners().subscribe();
       }
     });
   }

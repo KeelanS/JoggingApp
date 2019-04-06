@@ -19,9 +19,11 @@ import { AddDeelnemerModalComponent } from './add-deelnemer-modal/add-deelnemer-
 import { InvullenModalComponent } from './invullen-modal/invullen-modal.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatFormFieldModule, MatInputModule} from "@angular/material";
+import { RunnerSorter } from './runnerSorter';
 
 @NgModule({
   declarations: [
+    RunnerSorter,
     AppComponent,
     SidebarComponent,
     ContentComponent,
