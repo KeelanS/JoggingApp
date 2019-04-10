@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 300px;
 }
 
 .linker-form {
@@ -16,8 +15,9 @@
 
 .preview-lijst {
   width: 375px;
-  max-height: 300px;
+  max-height: 275px;
   overflow: auto;
+  margin-top: 1em;
 }
 
 .top-buttons {
@@ -38,6 +38,7 @@
 
 .bot-buttons {
   margin-top: 10%;
+  margin-bottom: 2em;
 
   display: flex;
   flex-direction: row;

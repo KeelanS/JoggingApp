@@ -1,38 +1,43 @@
 <div class="wrapper">
   <div class="linker-form" [formGroup]="myForm">
-    <div class="top-buttons btn-group btn-group-toggle">
-      <button class="btn btn-outline-success" (click)="selectRank()">Volgorde</button>
-      <button class="btn btn-outline-success" (click)="selectTime()">Tijden</button>
+    <div class="top-buttons">
+      <mat-button-toggle-group name="kiezen">
+        <mat-button-toggle value="volgorde" (change)="selectRank()">Volgorde</mat-button-toggle>
+        <mat-button-toggle value="tijden" (change)="selectTime()">Tijden</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
     <div class="invul-input">
-      <label *ngIf="toggle">
+      <label>
         <mat-form-field>
-          <input formControlName="startnummer"
+          <input *ngIf="toggle"
+                 #startVeld
+                 formControlName="startnummer"
                  matInput
                  type="text"
-                 placeholder="Startnummer"
+                 placeholder="Startnummer ([enter] dient in)"
                  (keyup.enter)="submitStartnummer()"
                  autocomplete="off"
+                 appAutofocus
                  [errorStateMatcher]="matcher">
-          <mat-error *ngIf="startnummer.invalid">{{getStartnummerErrorMessage()}}</mat-error>
-        </mat-form-field>
-      </label>
-      <label *ngIf="!toggle">
-        <mat-form-field>
-          <input formControlName="tijd"
+          <mat-error *ngIf="toggle && startnummer.invalid">{{getStartnummerErrorMessage()}}</mat-error>
+
+          <input *ngIf="!toggle"
+                 #tijdVeld
+                 formControlName="tijd"
                  matInput
                  type="text"
-                 placeholder="Tijd"
+                 placeholder="Tijd ([enter] dient in)"
                  (keyup.enter)="submitTijd()"
                  [errorStateMatcher]="matcher"
+                 appAutofocus
                  autocomplete="off">
-          <mat-error *ngIf="tijd.invalid">{{getTijdErrorMessage()}}</mat-error>
+          <mat-error *ngIf="!toggle && tijd.invalid">{{getTijdErrorMessage()}}</mat-error>
         </mat-form-field>
       </label>
     </div>
     <div class="bot-buttons">
       <button class="btn btn-primary" (click)="modalService.dismissAll('Cancelled')">Cancel</button>
-      <button class="btn btn-primary" (click)="submitAll()">Submit</button>
+      <button class="btn btn-primary" (click)="submitAll()">Submit lijst</button>
     </div>
   </div>
 

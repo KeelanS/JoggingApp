@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DataService} from "../data.service";
@@ -34,12 +34,14 @@ export class InvullenModalComponent implements OnInit {
       Validators.pattern('^[0-9]*$'),
       Validators.minLength(3),
       Validators.maxLength(4),
-      this.alleTijdenIngevuldValidator.bind(this)
+      this.alleTijdenIngevuldValidator.bind(this),
+      this.tijdNaVorigValidator.bind(this),
     ]),
   });
   toggle = true;
   selectedRowIndex = 0;
   timeIndex = 1;
+  lastTime = 0;
 
   constructor(public dataService: DataService,
               public modalService: NgbModal,
@@ -90,6 +92,18 @@ export class InvullenModalComponent implements OnInit {
     return null;
   }
 
+  tijdNaVorigValidator(control: FormControl) {
+    let tijd = control.value;
+    if (tijd < this.lastTime) {
+      return {
+        vroeger: {
+          tijd: tijd,
+        }
+      }
+    }
+    return null;
+  }
+
   selectRank() {
     this.toggle = true;
     this.selectedRowIndex = 0;
@@ -132,6 +146,7 @@ export class InvullenModalComponent implements OnInit {
       this.getRunnerByRank(this.timeIndex).finish = this.tijd.value;
       this.timeIndex++;
       this.selectedRowIndex++;
+      this.lastTime = this.tijd.value;
       this.tijd.reset();
     }
   }
@@ -155,14 +170,13 @@ export class InvullenModalComponent implements OnInit {
   getTijdErrorMessage() {
     return this.tijd.hasError('required') ? "De tijd moet ingevuld zijn" :
       this.tijd.hasError('pattern') ? "Enkel cijfers toegelaten" :
-        (this.tijd.hasError('minlength',) || this.tijd.hasError('maxlength')) ?
-          "Tijd is 3-4 cijfers lang" : 
-          this.tijd.hasError('allesIngevuld') ? "Alle tijden zijn ingevuld" : "";
+        (this.tijd.hasError('minlength',) || this.tijd.hasError('maxlength')) ? "Tijd is 3-4 cijfers lang" :
+          this.tijd.hasError('allesIngevuld') ? "Alle tijden zijn ingevuld" :
+            this.tijd.hasError('vroeger') ? "Tijd moet op of na vorige liggen" : "";
   }
 
   submitAll() {
     this.dataService.editRunnerList(this.lijst).subscribe();
-    this.dataService.getRunners().subscribe();
     this.modalService.dismissAll("Data submitted");
   }
 

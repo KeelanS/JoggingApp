@@ -13,10 +13,10 @@ const endpoint = 'http://localhost:3000/';
   providedIn: 'root'
 })
 export class DataService {
-  //Saved to
+
   private raceId = 0;
-  private _raceId$ = new BehaviorSubject(this.raceId);
-  raceId$: Observable<Number> = this._raceId$.asObservable();
+  // private _raceId$ = new BehaviorSubject(this.raceId);
+  // raceId$: Observable<Number> = this._raceId$.asObservable();
 
   private races: Race[] = [];
   private _races$ = new BehaviorSubject([]);
@@ -32,7 +32,7 @@ export class DataService {
 
   setRaceId(id: number) {
     this.raceId = id;
-    this._raceId$.next(this.raceId);
+    // this._raceId$.next(this.raceId);
   }
 
   getRaceId(): number {
@@ -129,12 +129,19 @@ export class DataService {
   }
 
   editRunnerList(lijst: Runner[]): Observable<boolean> {
-    return this.http.put(endpoint + 'runners', lijst).pipe(
+    return this.http.put<Runner[]>(endpoint + 'runners', lijst).pipe(
+      tap(runs => {
+        this.runners = runs;
+        this._runners$.next(this.runners);
+      }),
       mapTo(true)
     );
   }
 
   resetCurrentRunnerList(): void {
-    // this.runners.forEach()
+    this.runners.forEach(r => {
+      r.ranking = null;
+      r.finish = null;
+    });
   }
 }

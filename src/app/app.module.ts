@@ -18,8 +18,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddDeelnemerModalComponent } from './add-deelnemer-modal/add-deelnemer-modal.component';
 import { InvullenModalComponent } from './invullen-modal/invullen-modal.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatFormFieldModule, MatInputModule} from "@angular/material";
+import {MatButtonToggleModule, MatFormFieldModule, MatInputModule} from "@angular/material";
 import { RunnerSorter } from './runnerSorter';
+import {AutofocusDirective} from "./directives/autofocus.directive";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RunnerSorter } from './runnerSorter';
     PageNotFoundComponent,
     AddDeelnemerModalComponent,
     InvullenModalComponent,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { RunnerSorter } from './runnerSorter';
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatButtonToggleModule,
   ],
   entryComponents: [AddModalComponent, AddDeelnemerModalComponent, InvullenModalComponent],
   providers: [],

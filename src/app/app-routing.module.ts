@@ -9,8 +9,8 @@ const routes: Routes = [
   { path: '', redirectTo:'/content', pathMatch: 'full' },
   { path: 'content', component: ContentComponent},
   { path: 'list/:raceId', component: ListComponent},
-  { path: 'not-found', component: PageNotFoundComponent},
-  { path: '**', component: PageNotFoundComponent},
+  { path: 'not-found', component: ContentComponent},
+  { path: '**', component: ContentComponent},
 ];
 
 

@@ -48,7 +48,7 @@ export class AddDeelnemerModalComponent implements OnInit {
         if (this.myForm.controls.gender.dirty)
           this.runner.gender = this.myForm.get("gender").value.genderValue;
         this.dataService.editRunner(this.runner).subscribe();
-        this.dataService.getRunners().subscribe();
+        // this.dataService.getRunners().subscribe();
         this.modalService.dismissAll('Data editted')
       } else {
         this.modalService.dismissAll('Nothing changed so nothing sent');
