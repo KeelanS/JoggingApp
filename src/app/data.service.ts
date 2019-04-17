@@ -143,5 +143,6 @@ export class DataService {
       r.ranking = null;
       r.finish = null;
     });
+    this.editRunnerList(this.runners).subscribe();
   }
 }

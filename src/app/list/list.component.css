@@ -17,10 +17,6 @@ li {
   width: 200px;
 }
 
-/*li:nth-child(even) {*/
-  /*background-color: lightgray;*/
-/*}*/
-
 .rechts-float {
   float: right;
   margin-right: 20px;
@@ -28,8 +24,11 @@ li {
 }
 
 .bottom-buttons {
-  background-color: #16A085;
   margin: 15px 10px;
+}
+
+.normal-button {
+  background-color: #16A085;
 }
 
 .onderkant {

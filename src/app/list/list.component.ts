@@ -58,6 +58,11 @@ export class ListComponent implements OnInit, OnDestroy {
     this.modalService.open(InvullenModalComponent, {centered: true, windowClass: 'app-modal-window', size: 'lg', backdrop: "static", keyboard: false});
   }
 
+  resetResults() {
+    if (confirm("Ben je zeker dat je de resultaten wilt resetten?"))
+      this.dataService.resetCurrentRunnerList();
+  }
+
   updateRunner(runner: Runner) {
     const modalRef = this.modalService.open(AddDeelnemerModalComponent, {centered: true});
     modalRef.componentInstance.runner = runner;
