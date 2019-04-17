@@ -3,7 +3,7 @@ import { HideService } from "../hide.service";
 import {DataService} from "../data.service";
 import { NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { AddModalComponent } from "../add-modal/add-modal.component";
-import { Race } from "../race";
+import { Race } from "../race.model";
 import { Observable} from "rxjs/index";
 import {CdkDragDrop, moveItemInArray, CdkDragEnter, CdkDragExit, CdkDragStart, CdkDrag} from "@angular/cdk/drag-drop";
 

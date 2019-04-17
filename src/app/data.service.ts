@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Race } from "./race";
+import { Race } from "./race.model";
 import { BehaviorSubject, Observable } from "rxjs/index";
 import { HttpClient } from "@angular/common/http";
 import {map, mapTo, tap} from "rxjs/internal/operators";
-import {Runner} from "./runner";
+import {Runner} from "./runner.model";
 import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
 import { RunnerSorter } from './runnerSorter';
 

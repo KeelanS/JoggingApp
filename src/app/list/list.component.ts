@@ -4,7 +4,7 @@ import {DataService} from "../data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {combineLatest, Observable, Subject } from "rxjs/index";
 import {filter, takeUntil} from "rxjs/internal/operators";
-import {Runner} from "../runner";
+import {Runner} from "../runner.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddDeelnemerModalComponent} from "../add-deelnemer-modal/add-deelnemer-modal.component";
 import {InvullenModalComponent} from "../invullen-modal/invullen-modal.component";

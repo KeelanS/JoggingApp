@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../data.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {Runner} from "../runner";
+import {Runner} from "../runner.model";
 
 @Component({
   selector: 'app-add-deelnemer-modal',

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { HideService } from "./hide.service";
-import { Race } from "./race";
+import { Race } from "./race.model";
 import {DataService} from "./data.service";
 
 @Component({
