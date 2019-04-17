@@ -15,8 +15,6 @@ const endpoint = 'http://localhost:3000/';
 export class DataService {
 
   private raceId = 0;
-  // private _raceId$ = new BehaviorSubject(this.raceId);
-  // raceId$: Observable<Number> = this._raceId$.asObservable();
 
   private races: Race[] = [];
   private _races$ = new BehaviorSubject([]);
@@ -32,12 +30,12 @@ export class DataService {
 
   setRaceId(id: number) {
     this.raceId = id;
-    // this._raceId$.next(this.raceId);
   }
 
   getRaceId(): number {
     return this.raceId;
   }
+
   //Races
 
   getRaces(): Observable<boolean> {
@@ -64,8 +62,7 @@ export class DataService {
   }
 
   removeRace(): Observable<boolean>{
-
-    return this.http.post(endpoint + 'races/' + this.raceId + '/remove', {}).pipe(tap(() => {
+    return this.http.delete(endpoint + 'races/' + this.raceId).pipe(tap(() => {
       const race = this.races.filter(race => this.raceId == race.raceId)[0];
       const raceIndex = this.races.indexOf(race);
       this.races.splice(raceIndex, 1);
@@ -76,7 +73,7 @@ export class DataService {
   //Runners
 
   getRunners(): Observable<boolean> {
-    return this.http.get<Runner[]>(endpoint + 'races/' + this.raceId + '/runners').pipe(
+    return this.http.get<Runner[]>(endpoint + 'races/' + this.raceId).pipe(
       tap(runs => {
         this.runners = runs;
         this._runners$.next(this.runners);
@@ -103,13 +100,14 @@ export class DataService {
   }
 
   removeRunner(runner: Runner): Observable<boolean> {
-    return this.http.post(endpoint + 'runners/' + runner.startNumber + '/remove', {}).pipe(tap(() => {
-      const index = this.runners.indexOf(runner);
-      this.runners.splice(index, 1);
-      this._runners$.next(this.runners);
-    }),
+    return this.http.delete(endpoint + `runners/${runner.startNumber}/${runner.race_id}`).pipe(
+      tap(() => {
+        const index = this.runners.indexOf(runner);
+        this.runners.splice(index, 1);
+        this._runners$.next(this.runners);
+      }),
       mapTo(true)
-    )
+    );
   }
 
   editRunner(runner: Runner): Observable<boolean> {

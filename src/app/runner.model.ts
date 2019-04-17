@@ -6,6 +6,7 @@ export class Runner {
   race_id: number;
   ranking: number;
 
+
   constructor(startNumber: number,
               name: string,
               gender: string,

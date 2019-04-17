@@ -39,7 +39,6 @@ export class AddDeelnemerModalComponent implements OnInit {
       const raceId = this.dataService.getRaceId();
       const runner = new Runner(startNumber, name, gender, null, raceId, null);
       this.dataService.addRunner(runner).subscribe();
-      this.dataService.getRunners().subscribe();
       this.modalService.dismissAll('Data sent');
     } else {
       if (this.myForm.dirty) {
