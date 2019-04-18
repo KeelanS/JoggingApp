@@ -4,10 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Todo:
 
-* sql injection protection
+* sql injection protection //OPTIONAL
 * hardcode -> environment
 * checken op unieke key
-* DATABASE FIXEN: PK runner moet samenstelling zijn van startnummer EN race_id
+* ~~DATABASE FIXEN: PK runner moet samenstelling zijn van startnummer EN race_id~~
 
 ## Development server
 

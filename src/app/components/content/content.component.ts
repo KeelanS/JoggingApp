@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import { HideService } from "../hide.service";
-import {HeaderNameService} from "../header-name.service";
+import { HideService } from "../../hide.service";
+import {HeaderNameService} from "../../header-name.service";
 import {FormControl, FormGroup} from "@angular/forms";
-import {Race} from "../race.model";
+import {Race} from "../../race.model";
 import {Observable} from "rxjs/index";
-import {DataService} from "../data.service";
-import {AddModalComponent} from "../add-modal/add-modal.component";
+import {DataService} from "../../data.service";
+import {AddModalComponent} from "../../modals/add-modal/add-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({

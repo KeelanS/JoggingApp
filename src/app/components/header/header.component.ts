@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HideService } from "../hide.service";
-import {HeaderNameService} from "../header-name.service";
+import { HideService } from "../../hide.service";
+import {HeaderNameService} from "../../header-name.service";
 
 @Component({
   selector: 'app-header',

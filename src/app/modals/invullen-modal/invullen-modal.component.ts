@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {DataService} from "../data.service";
-import {Runner} from "../runner.model";
+import {DataService} from "../../data.service";
+import {Runner} from "../../runner.model";
 import {ErrorStateMatcher} from "@angular/material";
 
 /** Error when invalid control is dirty, touched, or submitted. */

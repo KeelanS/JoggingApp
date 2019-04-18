@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators} from "@angular/forms";
-import {DataService} from "../data.service";
+import {DataService} from "../../data.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {Runner} from "../runner.model";
+import {Runner} from "../../runner.model";
 
 @Component({
   selector: 'app-add-deelnemer-modal',
@@ -47,7 +47,6 @@ export class AddDeelnemerModalComponent implements OnInit {
         if (this.myForm.controls.gender.dirty)
           this.runner.gender = this.myForm.get("gender").value.genderValue;
         this.dataService.editRunner(this.runner).subscribe();
-        // this.dataService.getRunners().subscribe();
         this.modalService.dismissAll('Data editted')
       } else {
         this.modalService.dismissAll('Nothing changed so nothing sent');
