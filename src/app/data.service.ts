@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Race } from "./race.model";
-import { BehaviorSubject, Observable } from "rxjs/index";
-import { HttpClient } from "@angular/common/http";
-import {map, mapTo, tap} from "rxjs/internal/operators";
-import {Runner} from "./runner.model";
-import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
+import { Race } from './race.model';
+import { BehaviorSubject, Observable } from 'rxjs/index';
+import { HttpClient } from '@angular/common/http';
+import {map, mapTo, tap} from 'rxjs/internal/operators';
+import {Runner} from './runner.model';
+import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import { RunnerSorter } from './runnerSorter';
 
 const endpoint = 'http://localhost:3000/';
@@ -26,7 +26,7 @@ export class DataService {
 
   constructor( private http: HttpClient) { }
 
-  //RaceID
+  // RaceID
 
   setRaceId(id: number) {
     this.raceId = id;
@@ -36,7 +36,7 @@ export class DataService {
     return this.raceId;
   }
 
-  //Races
+  // Races
 
   getRaces(): Observable<boolean> {
     return this.http.get<Race[]>(endpoint + 'races').pipe(
@@ -61,16 +61,16 @@ export class DataService {
     );
   }
 
-  removeRace(): Observable<boolean>{
+  removeRace(): Observable<boolean> {
     return this.http.delete(endpoint + 'races/' + this.raceId).pipe(tap(() => {
       const race = this.races.filter(race => this.raceId == race.raceId)[0];
       const raceIndex = this.races.indexOf(race);
       this.races.splice(raceIndex, 1);
       this._races$.next(this.races);
-    }),mapTo(true));
+    }), mapTo(true));
   }
 
-  //Runners
+  // Runners
 
   getRunners(): Observable<boolean> {
     return this.http.get<Runner[]>(endpoint + 'races/' + this.raceId).pipe(
@@ -86,7 +86,7 @@ export class DataService {
     return JSON.parse(JSON.stringify(this.runners));
   }
 
-  addRunner(runner: Runner): Observable<Runner>{
+  addRunner(runner: Runner): Observable<Runner> {
     const body = {
       startNumber: runner.startNumber,
       name: runner.name,
@@ -120,7 +120,7 @@ export class DataService {
       ranking: runner.ranking,
     };
     return this.http.put<Runner>(endpoint + 'runners/' + runner.startNumber, body).pipe(tap(r => {
-      const index = this.runners.findIndex(runner => runner.startNumber == r.startNumber);
+      const index = this.runners.findIndex(runner => runner.startNumber === r.startNumber);
       this.runners.splice(index, 1, r);
       this._runners$.next(this.runners);
     }), mapTo(true));

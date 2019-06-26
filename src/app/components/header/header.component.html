@@ -1,12 +1,15 @@
-<header class="d-flex">
-  <div id="sidebar-button" [ngClass]="{'d-flex': status$ | async, 'justify-content-end': status$ | async, 'justify-content-start':!(status$ | async), 'button-to-left': !(status$ | async) }" >
-    <div (click)="hideService.change()">
-      <fa name="angle-double-left" [class.show]="!(status$ | async)" ></fa>
-      <span id="midden"><fa name="bars"></fa></span>
-      <fa name="angle-double-right" [class.show]="status$ | async"></fa>
+<div class="vast">
+  <header class="d-flex">
+    <div id="sidebar-button"
+         [ngClass]="{'d-flex': status$ | async, 'justify-content-end': status$ | async, 'justify-content-start':!(status$ | async), 'button-to-left': !(status$ | async) }">
+      <div (click)="hideService.change()">
+        <fa name="angle-double-left" class="pijl" [class.show]="!(status$ | async)"></fa>
+        <span id="midden"><fa name="bars"></fa></span>
+        <fa name="angle-double-right" class="pijl" [class.show]="status$ | async"></fa>
+      </div>
     </div>
-  </div>
-  <div class="logo">
-    {{headerName.name$ | async}}
-  </div>
-</header>
+    <div class="logo">
+      {{headerName.name$ | async}}
+    </div>
+  </header>
+</div>

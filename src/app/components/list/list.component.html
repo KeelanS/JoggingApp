@@ -21,7 +21,7 @@
               <td>{{col.startNumber}}</td>
               <td>{{col.name}}</td>
               <td>{{col.gender}}</td>
-              <td>{{col.finish ? col.finish.toString().slice(3,8) : null}}</td>
+              <td>{{col.finish ? showTime(col) : ""}}</td>
               <td><a (click)="removeRunner(col)"><fa name="trash"></fa></a></td>
               <td><a (click)="updateRunner(col)"><fa name="pencil"></fa></a></td>
             </tr>

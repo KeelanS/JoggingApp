@@ -81,6 +81,16 @@ export class ListComponent implements OnInit, OnDestroy {
     }
   }
 
+  showTime(runner: Runner): string {
+    let tijd = runner.finish;
+    let result: string;
+    if (tijd.length == 3)
+      result = '0' + tijd.substr(0,1) + ":" + tijd.substr(1,2);
+    else
+      result = tijd.substr(0,2) + ":" + tijd.substr(2,2);
+    return result;
+  }
+
   // - - a - -  b - - c - -   d - - e -
   // - - - - 1  - - - - - 2   - - - - -
   // ------(a1)(b1)-|-(c1)(c2)(d2)---------

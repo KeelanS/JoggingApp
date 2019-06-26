@@ -3,6 +3,7 @@
   width: 100%;
   position: absolute;
   padding: 15px;
+  margin-top: 82px;
 }
 
 .opened {
@@ -40,5 +41,14 @@
 
 .race-lijst a:hover {
   background-color: #16A085;
+}
+
+@media (max-width: 650px) {
+  .content-wrapper {
+    width: 100%;
+    position: relative;
+    padding: 15px;
+    margin-top: 0;
+  }
 }
 

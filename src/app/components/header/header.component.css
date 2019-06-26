@@ -2,33 +2,6 @@ header {
   background-color: #80B5E9;
 }
 
-/* Sidebar button */
-#sidebar-button {
-  font-size: 3em;
-  width: 250px;
-  letter-spacing: 5px;
-  color: #233140;
-  padding: 0 10px 0 10px;
-  border-right: 2px solid #233140;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-#midden {
-  font-size: 1em;
-}
-
-.show {
-  display: none;
-}
-
-.button-to-left {
-  padding-left: 10px;
-  width: 50px;
-}
-
-/* Logo */
-
 .logo {
   /* Text */
   font-size: 3em;
@@ -40,4 +13,58 @@ header {
   border-left: 2px solid #233140;
   margin-top: 5px;
   margin-bottom: 5px;
+  height: 72px;
+}
+
+header {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+@media (max-width: 650px) {
+  .logo {
+    font-size: 2em;
+    padding-left: 10px;
+    border-left: none;
+    height: 50px;
+  }
+
+  #sidebar-button {
+    margin: auto 5px;
+    font-size: 2em;
+  }
+
+  .pijl {
+    display: none;
+  }
+}
+
+@media (min-width: 651px) {
+
+  /* Sidebar button */
+  #sidebar-button {
+    font-size: 3em;
+    width: 250px;
+    letter-spacing: 5px;
+    color: #233140;
+    padding: 0 10px 0 10px;
+    border-right: 2px solid #233140;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  #midden {
+    font-size: 1em;
+  }
+
+  .show {
+    display: none;
+  }
+
+  .button-to-left {
+    padding-left: 10px;
+    width: 50px;
+  }
 }
