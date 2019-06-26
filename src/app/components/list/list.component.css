@@ -12,8 +12,24 @@
   padding-left: 250px;
 }
 
-h1 {
+.bovenkant {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: .7em;
+  align-items: center;
+}
+
+.bovenmidden {
+  display: flex;
+  width: calc(100% - 10px);
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.bovenlinks {
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 40px;
 }
 
 li {
