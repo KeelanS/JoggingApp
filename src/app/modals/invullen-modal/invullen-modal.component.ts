@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {DataService} from "../../data.service";
-import {Runner} from "../../runner.model";
-import {ErrorStateMatcher} from "@angular/material";
+import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DataService} from '../../data.service';
+import {Runner} from '../../runner.model';
+import {ErrorStateMatcher} from '@angular/material';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -19,6 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./invullen-modal.component.css']
 })
 export class InvullenModalComponent implements OnInit {
+  @ViewChild('previewList') list: ElementRef;
   matcher = new MyErrorStateMatcher();
 
   controleLijst: Runner[];
@@ -55,30 +56,30 @@ export class InvullenModalComponent implements OnInit {
   }
 
   startnummerValidator(control: FormControl) {
-    let nummer = control.value;
+    const nummer = control.value;
     if (nummer) {
-      let runner = this.getRunnerById(nummer);
+      const runner = this.getRunnerById(nummer);
       if (!runner) {
         return {
           startNummer: {
             nullRunner: runner
           }
-        }
+        };
       }
       return null;
     }
   }
 
   alInLijstValidator(control: FormControl) {
-    let nummer = control.value;
+    const nummer = control.value;
     if (nummer) {
-      let runner = this.getRunnerById(nummer);
-      if (!runner || this.lijst.find(r => r.startNumber == runner.startNumber)) {
+      const runner = this.getRunnerById(nummer);
+      if (!runner || this.lijst.find(r => r.startNumber === runner.startNumber)) {
         return {
           inLijst: {
             nummer: nummer,
           }
-        }
+        };
       }
       return null;
     }
@@ -87,19 +88,19 @@ export class InvullenModalComponent implements OnInit {
   alleTijdenIngevuldValidator(control: FormControl) {
 
     if (this.controleLijst == null || this.selectedRowIndex > this.controleLijst.length) {
-      return {allesIngevuld: true}
+      return {allesIngevuld: true};
     }
     return null;
   }
 
   tijdNaVorigValidator(control: FormControl) {
-    let tijd = control.value;
+    const tijd = control.value;
     if (tijd < this.lastTime) {
       return {
         vroeger: {
           tijd: tijd,
         }
-      }
+      };
     }
     return null;
   }
@@ -111,6 +112,7 @@ export class InvullenModalComponent implements OnInit {
   }
 
   selectTime() {
+    this.list.nativeElement.scrollTop = 0;
     this.toggle = false;
     this.selectedRowIndex = this.timeIndex;
     this.tijd.reset();
@@ -125,19 +127,22 @@ export class InvullenModalComponent implements OnInit {
   }
 
   getRunnerById(runnerStartnummer: number): Runner {
-    return this.controleLijst.find(r => r.startNumber == runnerStartnummer);
+    return this.controleLijst.find(r => r.startNumber === runnerStartnummer);
   }
 
   getRunnerByRank(rank: number): Runner {
-    return this.controleLijst.find(r => r.ranking == rank);
+    return this.controleLijst.find(r => r.ranking === rank);
   }
 
   submitStartnummer() {
     if (this.startnummer.valid) {
-      let runner = this.getRunnerById(this.startnummer.value);
-      runner.ranking = this.lijst.length +1;
+      const runner = this.getRunnerById(this.startnummer.value);
+      runner.ranking = this.lijst.length + 1;
       this.lijst.push(runner);
       this.startnummer.reset();
+      setTimeout(() => {
+          this.list.nativeElement.scrollTop = this.list.nativeElement.scrollHeight;
+      });
     }
   }
 
@@ -152,32 +157,33 @@ export class InvullenModalComponent implements OnInit {
   }
 
   showTime(runner: Runner): string {
-    let tijd = runner.finish;
+    const tijd = runner.finish;
     let result: string;
-    if (tijd.length == 3)
-      result = '0' + tijd.substr(0,1) + ":" + tijd.substr(1,2);
-    else
-      result = tijd.substr(0,2) + ":" + tijd.substr(2,2);
+    if (tijd.length === 3) {
+      result = '0' + tijd.substr(0, 1) + ':' + tijd.substr(1, 2);
+    } else {
+      result = tijd.substr(0, 2) + ':' + tijd.substr(2, 2);
+    }
     return result;
   }
 
   getStartnummerErrorMessage() {
-    return this.startnummer.hasError('required') ? "Het startnummer moet ingevuld zijn" :
-      this.startnummer.hasError("startNummer") ? "Niemand in deze race heeft dat startnummer":
-        this.startnummer.hasError("inLijst")? "Deze persoon zit al in de lijst" : "";
+    return this.startnummer.hasError('required') ? 'Het startnummer moet ingevuld zijn' :
+      this.startnummer.hasError('startNummer') ? 'Niemand in deze race heeft dat startnummer' :
+        this.startnummer.hasError('inLijst') ? 'Deze persoon zit al in de lijst' : '';
   }
 
   getTijdErrorMessage() {
-    return this.tijd.hasError('required') ? "De tijd moet ingevuld zijn" :
-      this.tijd.hasError('pattern') ? "Enkel cijfers toegelaten" :
-        (this.tijd.hasError('minlength',) || this.tijd.hasError('maxlength')) ? "Tijd is 3-4 cijfers lang" :
-          this.tijd.hasError('allesIngevuld') ? "Alle tijden zijn ingevuld" :
-            this.tijd.hasError('vroeger') ? "Tijd moet op of na vorige liggen" : "";
+    return this.tijd.hasError('required') ? 'De tijd moet ingevuld zijn' :
+      this.tijd.hasError('pattern') ? 'Enkel cijfers toegelaten' :
+        (this.tijd.hasError('minlength', ) || this.tijd.hasError('maxlength')) ? 'Tijd is 3-4 cijfers lang' :
+          this.tijd.hasError('allesIngevuld') ? 'Alle tijden zijn ingevuld' :
+            this.tijd.hasError('vroeger') ? 'Tijd moet op of na vorige liggen' : '';
   }
 
   submitAll() {
     this.dataService.editRunnerList(this.lijst).subscribe();
-    this.modalService.dismissAll("Data submitted");
+    this.modalService.dismissAll('Data submitted');
   }
 
 }
