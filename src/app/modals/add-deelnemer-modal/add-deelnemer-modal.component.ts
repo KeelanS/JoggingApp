@@ -34,6 +34,7 @@ export class AddDeelnemerModalComponent implements OnInit {
   }
 
   startnummerValidator(control: FormControl) {
+    if (!!this.runner) { return null; }
     const nummer = control.value;
     if (nummer <= 0) {
       return {

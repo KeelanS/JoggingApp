@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from "../../data.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import { NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { DataService } from '../../data.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-modal',
@@ -12,7 +12,8 @@ export class AddModalComponent implements OnInit {
 
   myForm: FormGroup;
 
-  addRace(name: string): void {
+  addRace(): void {
+    const name = this.myForm.value.name;
     this.dataService.addRace(name).subscribe();
     this.modalService.dismissAll('Data sent');
   }
@@ -25,7 +26,7 @@ export class AddModalComponent implements OnInit {
   ngOnInit() {
     this.myForm = this.fb.group({
       name: ''
-    })
+    });
   }
 
 }
