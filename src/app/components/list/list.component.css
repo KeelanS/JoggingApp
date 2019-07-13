@@ -1,4 +1,4 @@
-/* Content */
+/* Gives space for menubar and sidebar */
 .content-wrapper {
   width: 100%;
   position: absolute;
@@ -12,6 +12,7 @@
   padding-left: 250px;
 }
 
+/* Content */
 .bovenkant {
   display: flex;
   justify-content: space-between;

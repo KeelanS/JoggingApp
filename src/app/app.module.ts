@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {MatButtonToggleModule, MatFormFieldModule, MatInputModule} from "@angular/material";
 import { RunnerSorter } from './runnerSorter';
 import {AutofocusDirective} from "./directives/autofocus.directive";
+import { PrintLayoutComponent } from './components/print-layout/print-layout.component';
+import { UitslagComponent } from './components/uitslag/uitslag.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import {AutofocusDirective} from "./directives/autofocus.directive";
     PageNotFoundComponent,
     AddDeelnemerModalComponent,
     InvullenModalComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    PrintLayoutComponent,
+    UitslagComponent
   ],
   imports: [
     BrowserModule,

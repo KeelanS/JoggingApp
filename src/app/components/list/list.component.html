@@ -6,7 +6,7 @@
           <h1>{{naam}}</h1>
           <div class="bovenmidden">
             <button class="btn btn-success bottom-buttons normal-button" (click)="addRunner()">Voeg deelnemer toe</button>
-            <button class="btn btn-success bottom-buttons normal-button">Print uitslag</button>
+            <button class="btn btn-success bottom-buttons normal-button" [routerLink]="['/print']">Print uitslag</button>
           </div>
           <a (click)="removeRace()"><fa class="bovenlinks" name="trash"></fa></a>
         </div>
