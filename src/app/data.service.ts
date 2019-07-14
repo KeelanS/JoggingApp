@@ -36,6 +36,12 @@ export class DataService {
     return this.raceId;
   }
 
+  getRaceName(): string {
+    if (this.races.length !== 0) {
+      return this.races.find(r => r.raceId === this.raceId).raceName;
+    }
+  }
+
   // Races
 
   getRaces(): Observable<boolean> {

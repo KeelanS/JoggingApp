@@ -25,7 +25,7 @@ export class InvullenModalComponent implements OnInit {
   controleLijst: Runner[];
   lijst: Runner[] = [];
   myForm = new FormGroup({
-    startnummer: new FormControl('', [
+    startnummer: new FormControl(null, [
       Validators.required,
       this.startnummerValidator.bind(this),
       this.alInLijstValidator.bind(this),
@@ -86,7 +86,6 @@ export class InvullenModalComponent implements OnInit {
   }
 
   alleTijdenIngevuldValidator(control: FormControl) {
-
     if (this.controleLijst == null || this.selectedRowIndex > this.controleLijst.length) {
       return {allesIngevuld: true};
     }
@@ -153,6 +152,10 @@ export class InvullenModalComponent implements OnInit {
       this.selectedRowIndex++;
       this.lastTime = this.tijd.value;
       this.tijd.reset();
+      setTimeout(() => {
+        const scrollHeight = this.list.nativeElement.scrollHeight / this.lijst.length;
+        this.list.nativeElement.scrollTop = scrollHeight * (this.timeIndex - 1);
+      });
     }
   }
 

@@ -1,0 +1,23 @@
+<div [ngClass]="{opened: status$ | async, 'content-wrapper': true}">
+  <div class="container-fluid printMe">
+    <div class="row">
+      <div class="col-12">
+        <p>
+          <button class="d-print-none btn btn-primary" (click)="print()">Print uitslag</button>
+        </p>
+        <header class="row">
+          <img src="../../../assets/feestlogo.jpg" alt="feestlogo">
+          <div class="eventnaam">
+            <p>{{eventName$ | async}}</p>
+            <p>Categorie: {{raceName}}</p>
+          </div>
+        </header>
+        <app-uitslag [runners]="runners$ | async"></app-uitslag>
+        <footer>
+          <img src="../../../assets/maldegemLogo.jpg">
+          <img src="../../../assets/vlaanderenLogo.png">
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

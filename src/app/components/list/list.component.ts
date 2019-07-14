@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { HideService } from "../../hide.service";
-import {DataService} from "../../data.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {combineLatest, Observable, Subject } from "rxjs/index";
-import {filter, takeUntil} from "rxjs/internal/operators";
-import {Runner} from "../../runner.model";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AddDeelnemerModalComponent} from "../../modals/add-deelnemer-modal/add-deelnemer-modal.component";
-import {InvullenModalComponent} from "../../modals/invullen-modal/invullen-modal.component";
+import { HideService } from '../../hide.service';
+import {DataService} from '../../data.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {combineLatest, Observable, Subject } from 'rxjs/index';
+import {filter, takeUntil} from 'rxjs/internal/operators';
+import {Runner} from '../../runner.model';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AddDeelnemerModalComponent} from '../../modals/add-deelnemer-modal/add-deelnemer-modal.component';
+import {InvullenModalComponent} from '../../modals/invullen-modal/invullen-modal.component';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +20,7 @@ export class ListComponent implements OnInit, OnDestroy {
   lijst$: Observable<Runner[]>;
   naam: string;
 
-  //route wordt gebruikt om te weten welke race je gebruikt
+  // route wordt gebruikt om te weten welke race je gebruikt
   constructor( public hideService: HideService,
                public dataService: DataService,
                private route: ActivatedRoute,
@@ -36,7 +36,7 @@ export class ListComponent implements OnInit, OnDestroy {
     ).subscribe(([races, params]) => {
       const race = races.find(race => race.raceId.toString() == params.raceId);
       if (!race) {
-        this.router.navigate(["not-found"]);
+        this.router.navigate(['not-found']);
       } else {
         this.naam = race.raceName;
         this.lijst$ = this.dataService.runners$;
@@ -50,17 +50,25 @@ export class ListComponent implements OnInit, OnDestroy {
     this.destroy$.next();
   }
 
-  addRunner(){
+  addRunner() {
     this.modalService.open(AddDeelnemerModalComponent, {centered: true});
   }
 
   fillResults() {
-    this.modalService.open(InvullenModalComponent, {centered: true, windowClass: 'app-modal-window', size: 'lg', backdrop: "static", keyboard: false});
+    this.modalService.open(
+      InvullenModalComponent, {
+        centered: true,
+        windowClass: 'app-modal-window',
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: false
+      });
   }
 
   resetResults() {
-    if (confirm("Ben je zeker dat je de resultaten wilt resetten?"))
+    if (confirm('Ben je zeker dat je de resultaten wilt resetten?')) {
       this.dataService.resetCurrentRunnerList();
+    }
   }
 
   updateRunner(runner: Runner) {
@@ -76,18 +84,19 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   removeRunner(runner: Runner) {
-    if (confirm("Ben je zeker dat je " + runner.name + " wilt verwijderen?")) {
+    if (confirm('Ben je zeker dat je ' + runner.name + ' wilt verwijderen?')) {
       this.dataService.removeRunner(runner).subscribe();
     }
   }
 
   showTime(runner: Runner): string {
-    let tijd = runner.finish;
+    const tijd = runner.finish;
     let result: string;
-    if (tijd.length == 3)
-      result = '0' + tijd.substr(0,1) + ":" + tijd.substr(1,2);
-    else
-      result = tijd.substr(0,2) + ":" + tijd.substr(2,2);
+    if (tijd.length === 3) {
+      result = '0' + tijd.substr(0, 1) + ':' + tijd.substr(1, 2);
+    } else {
+      result = tijd.substr(0, 2) + ':' + tijd.substr(2, 2);
+    }
     return result;
   }
 
