@@ -69,7 +69,7 @@ export class DataService {
 
   removeRace(): Observable<boolean> {
     return this.http.delete(endpoint + 'races/' + this.raceId).pipe(tap(() => {
-      const race = this.races.filter(race => this.raceId == race.raceId)[0];
+      const race = this.races.filter(r => this.raceId === r.raceId)[0];
       const raceIndex = this.races.indexOf(race);
       this.races.splice(raceIndex, 1);
       this._races$.next(this.races);

@@ -22,8 +22,8 @@ export class AddDeelnemerModalComponent implements OnInit {
 
   @Input() public runner: Runner;
 
-  private title = 'Deelnemer toevoegen';
-  private buttonText = 'Toevoegen';
+  title = 'Deelnemer toevoegen';
+  buttonText = 'Toevoegen';
 
   constructor(public dataService: DataService,
               public modalService: NgbModal,

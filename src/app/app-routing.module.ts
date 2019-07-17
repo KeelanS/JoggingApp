@@ -6,8 +6,7 @@ import { ContentComponent } from './components/content/content.component';
 import {PrintLayoutComponent} from './components/print-layout/print-layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/content', pathMatch: 'full' },
-  { path: 'content', component: ContentComponent},
+  { path: '', pathMatch: 'full', component: ContentComponent },
   { path: 'list/:raceId', component: ListComponent},
   { path: 'print', component: PrintLayoutComponent},
   { path: 'not-found', component: ContentComponent},

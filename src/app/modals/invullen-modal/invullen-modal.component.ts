@@ -71,7 +71,7 @@ export class InvullenModalComponent implements OnInit {
   }
 
   alInLijstValidator(control: FormControl) {
-    const nummer = control.value;
+    const nummer = +control.value;
     if (nummer) {
       const runner = this.getRunnerById(nummer);
       if (!runner || this.lijst.find(r => r.startNumber === runner.startNumber)) {
@@ -150,7 +150,7 @@ export class InvullenModalComponent implements OnInit {
       this.getRunnerByRank(this.timeIndex).finish = this.tijd.value;
       this.timeIndex++;
       this.selectedRowIndex++;
-      this.lastTime = this.tijd.value;
+      this.lastTime = +this.tijd.value;
       this.tijd.reset();
       setTimeout(() => {
         const scrollHeight = this.list.nativeElement.scrollHeight / this.lijst.length;
