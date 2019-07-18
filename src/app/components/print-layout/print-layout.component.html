@@ -6,7 +6,7 @@
           <button class="d-print-none btn btn-primary" (click)="print()">Print uitslag</button>
         </p>
         <header class="row">
-          <img src="../../../assets/feestlogo.jpg" alt="feestlogo">
+          <img src="assets/feestlogo.jpg" alt="feestlogo">
           <div class="eventnaam">
             <p>{{eventName$ | async}}</p>
             <p>Categorie: {{raceName}}</p>
@@ -14,8 +14,8 @@
         </header>
         <app-uitslag [runners]="runners$ | async"></app-uitslag>
         <footer>
-          <img src="../../../assets/maldegemLogo.jpg">
-          <img src="../../../assets/vlaanderenLogo.png">
+          <img src="assets/maldegemLogo.jpg">
+          <img src="assets/vlaanderenLogo.png">
         </footer>
       </div>
     </div>
