@@ -27,10 +27,15 @@
   flex-wrap: wrap;
 }
 
-.bovenlinks {
+.bovenrechts {
   margin-right: 20px;
+}
+
+.bovenrechts a {
   cursor: pointer;
   font-size: 40px;
+  margin-left: 40px;
+  color: inherit;
 }
 
 li {
