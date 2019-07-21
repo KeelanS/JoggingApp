@@ -1,20 +1,26 @@
 <table class="table">
   <thead class="thead-light">
-  <tr>
-    <th scope="col" width="50px">Rangschikking</th>
-    <th scope="col" width="50px">Startnummer</th>
-    <th scope="col" style="min-width: 250px">Naam</th>
-    <th scope="col">Geslacht</th>
-    <th scope="col">Tijd</th>
-  </tr>
+    <tr>
+      <th scope="col" width="50px">Rangschikking</th>
+      <th scope="col" width="50px">Startnummer</th>
+      <th scope="col" style="min-width: 250px">Naam</th>
+      <th scope="col">Geslacht</th>
+      <th scope="col">Tijd</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let col of runners" >
-    <td>{{col.ranking}}</td>
-    <td>{{col.startNumber}}</td>
-    <td>{{col.name}}</td>
-    <td>{{col.gender}}</td>
-    <td>{{col.finish ? showTime(col) : ""}}</td>
-  </tr>
+    <tr *ngFor="let col of runners">
+      <td class="top3">
+        <span>{{col.ranking}}</span>
+        <fa *ngIf="isTop3(col)" name="trophy"></fa>
+      </td>
+      <td>{{col.startNumber}}</td>
+      <td>
+        <span>{{col.name}}</span>
+        <fa class="trofee" *ngIf="isTop3(col)" name="trophy"></fa>
+      </td>
+      <td>{{col.gender}}</td>
+      <td>{{col.finish ? showTime(col) : ""}}</td>
+    </tr>
   </tbody>
 </table>
