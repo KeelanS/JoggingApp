@@ -20,10 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class InvullenModalComponent implements OnInit {
   @ViewChild('previewList') list: ElementRef;
-  matcher = new MyErrorStateMatcher();
 
-  controleLijst: Runner[];
-  lijst: Runner[] = [];
   myForm = new FormGroup({
     startnummer: new FormControl(null, [
       Validators.required,
@@ -39,6 +36,12 @@ export class InvullenModalComponent implements OnInit {
       this.tijdNaVorigValidator.bind(this),
     ]),
   });
+
+  matcher = new MyErrorStateMatcher();
+
+  controleLijst: Runner[];
+  lijst: Runner[] = [];
+
   toggle = true;
   selectedRowIndex = 0;
   timeIndex = 1;
@@ -52,6 +55,7 @@ export class InvullenModalComponent implements OnInit {
     this.controleLijst = this.dataService.getRunnersCopy();
     this.controleLijst.forEach(r => {
       r.finish = null;
+      r.ranking = null;
     });
   }
 
@@ -159,6 +163,28 @@ export class InvullenModalComponent implements OnInit {
     }
   }
 
+  // Deze methode verwijderd het laatste startnummer of de laatste tijd die je ingegeven hebt.
+  undo() {
+    // Toggle is true wanneer je startnummers aan het ingeven bent
+    // Toggle is false wanneer je tijden aan het ingeven bent
+    if (this.lijst.length > 0) {
+      if (this.toggle) {
+        this.lijst.splice(-1, 1);
+        setTimeout(() => {
+          this.list.nativeElement.scrollTop = this.list.nativeElement.scrollHeight;
+        });
+      } else {
+        this.lijst[this.timeIndex - 2].finish = null;
+        this.timeIndex--;
+        this.selectedRowIndex--;
+        setTimeout(() => {
+          const scrollHeight = this.list.nativeElement.scrollHeight / this.lijst.length;
+          this.list.nativeElement.scrollTop = scrollHeight * (this.timeIndex - 1);
+        });
+      }
+    }
+  }
+
   showTime(runner: Runner): string {
     const tijd = runner.finish;
     let result: string;
@@ -185,8 +211,10 @@ export class InvullenModalComponent implements OnInit {
   }
 
   submitAll() {
-    this.dataService.editRunnerList(this.lijst).subscribe();
-    this.modalService.dismissAll('Data submitted');
+    if (this.lijst.length > 0) {
+      this.dataService.editRunnerList(this.lijst).subscribe();
+      this.modalService.dismissAll('Data submitted');
+    }
   }
 
 }
