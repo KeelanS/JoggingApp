@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:electron": "ng build --base-href ./ && electron .",
-    "build:electron": "electron-packager . --platform=win32 --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src"
+    "build:electron": "ng build --prod && electron-packager . --platform=win32 --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src"
   },
   "private": true,
   "dependencies": {
