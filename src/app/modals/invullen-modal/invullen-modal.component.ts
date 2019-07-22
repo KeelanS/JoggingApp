@@ -45,7 +45,7 @@ export class InvullenModalComponent implements OnInit {
   toggle = true;
   selectedRowIndex = 0;
   timeIndex = 1;
-  lastTime = 0;
+  lastTime = '0';
 
   constructor(public dataService: DataService,
               public modalService: NgbModal,
@@ -90,7 +90,7 @@ export class InvullenModalComponent implements OnInit {
   }
 
   alleTijdenIngevuldValidator(control: FormControl) {
-    if (this.controleLijst == null || this.selectedRowIndex > this.controleLijst.length) {
+    if (this.lijst == null || this.selectedRowIndex > this.lijst.length) {
       return {allesIngevuld: true};
     }
     return null;
@@ -98,7 +98,7 @@ export class InvullenModalComponent implements OnInit {
 
   tijdNaVorigValidator(control: FormControl) {
     const tijd = control.value;
-    if (tijd < this.lastTime) {
+    if (+tijd < +this.lastTime) {
       return {
         vroeger: {
           tijd: tijd,
@@ -154,7 +154,7 @@ export class InvullenModalComponent implements OnInit {
       this.getRunnerByRank(this.timeIndex).finish = this.tijd.value;
       this.timeIndex++;
       this.selectedRowIndex++;
-      this.lastTime = +this.tijd.value;
+      this.lastTime = this.tijd.value;
       this.tijd.reset();
       setTimeout(() => {
         const scrollHeight = this.list.nativeElement.scrollHeight / this.lijst.length;
@@ -168,15 +168,33 @@ export class InvullenModalComponent implements OnInit {
     // Toggle is true wanneer je startnummers aan het ingeven bent
     // Toggle is false wanneer je tijden aan het ingeven bent
     if (this.lijst.length > 0) {
+      // STARTNUMMER
       if (this.toggle) {
+        const last = this.lijst[this.lijst.length - 1];
+        if (last.finish !== null) {
+          last.finish = null;
+          this.timeIndex--;
+        }
         this.lijst.splice(-1, 1);
+        if (this.lijst.length === 1) {
+          this.lastTime = '0';
+        } else if (this.lijst[this.lijst.length - 1].finish !== null) {
+          this.lastTime = this.lijst[this.lijst.length - 1].finish;
+        }
         setTimeout(() => {
           this.list.nativeElement.scrollTop = this.list.nativeElement.scrollHeight;
         });
-      } else {
+      }
+      // TIJD
+      else {
         this.lijst[this.timeIndex - 2].finish = null;
         this.timeIndex--;
         this.selectedRowIndex--;
+        if (this.selectedRowIndex === 1) {
+          this.lastTime = '0';
+        } else {
+          this.lastTime = this.lijst[this.selectedRowIndex - 2].finish;
+        }
         setTimeout(() => {
           const scrollHeight = this.list.nativeElement.scrollHeight / this.lijst.length;
           this.list.nativeElement.scrollTop = scrollHeight * (this.timeIndex - 1);
