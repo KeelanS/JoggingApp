@@ -10,6 +10,8 @@ export class UitslagComponent implements OnInit {
   @Input() runners: Runner[];
 
   eersteVrouwen: number[] = [];
+  heeftUitslag = false;
+  heeftRanking = false;
 
   constructor() { }
 
@@ -26,6 +28,8 @@ export class UitslagComponent implements OnInit {
 
   ngOnInit(): void {
     this.findTop3();
+    this.heeftUitslag = !!this.runners[0].finish;
+    this.heeftRanking = !!this.runners[0].ranking;
   }
 
   isTop3(runner: Runner) {

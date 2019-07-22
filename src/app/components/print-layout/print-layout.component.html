@@ -8,8 +8,8 @@
         <header class="row">
           <img src="assets/feestlogo.jpg" alt="feestlogo">
           <div class="eventnaam">
-            <p>{{eventName$ | async}}</p>
-            <p>Categorie: {{raceName}}</p>
+            <h1>{{eventName$ | async}}</h1>
+            <h2>Categorie: {{raceName}}</h2>
           </div>
         </header>
         <app-uitslag [runners]="runners$ | async"></app-uitslag>
